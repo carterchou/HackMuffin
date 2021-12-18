@@ -5,80 +5,51 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     static GameManager instance;
-     public static GameManager GetInstance()
-    {
+
+    public List<playController> slimes;
+    public int playerMaxHP = 10;
+    public int speed = 2;
+
+    bool isLose = false;
+ 
+    public static GameManager GetInstance() {
+        if(instance == null)
+        {
+            instance = new GameObject("GameManager").AddComponent<GameManager>();
+            instance.slimes = new List<playController>();
+        }
+
         return instance;
     }
 
-    public GameObject player;
-    public GameObject littleMonster;
-    public GameObject mediumMonster;
-    public GameObject bigMonster;
-    public Transform CanvasRoot;
-
-    public bool canGenerateMon = false;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        instance = this;
-        //InvokeRepeating("GenerateMonster", 0f, 1f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (isLose)
         {
-            StartGenMon();
+            return;
         }
-        if (Input.GetKeyDown(KeyCode.X))
+
+        if(slimes.Count <= 0 && isLose == false)
         {
-            StopGenMon();
+            isLose = true;
+            Debug.Log("lose");
+            return;
+        }
+
+        //checkRoot;
+        bool foundRoot = false;
+        foreach (playController slime in slimes)
+        {
+            if(foundRoot == false && slime.CheckRoot())
+            {
+                foundRoot = true;
+                break;
+            }
+        }
+
+        if(foundRoot == false)
+        {
+            slimes[0].SetRoot(true);
         }
     }
-
-     void GenerateMonster() {
-
-        int randomMon = Random.Range(0, 3);
-        Debug.Log(randomMon);
-        if (randomMon == 0)
-        {
-            GameObject tempG = Instantiate(littleMonster);
-            tempG.GetComponent<Transform>().localPosition = new Vector3(Random.Range(-10,10), Random.Range(-10, 10), 0);
-            //tempG.GetComponent<Monster>().blood = 10000;
-
-        }
-        else if (randomMon == 1)
-        {
-            GameObject tempG = Instantiate(mediumMonster);
-            tempG.GetComponent<Transform>().localPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
-            //tempG.GetComponent<Monster>().blood = 10000;
-        }
-        else {
-            GameObject tempG = Instantiate(bigMonster);
-            tempG.GetComponent<Transform>().localPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
-            //tempG.GetComponent<Monster>().blood = 10000;
-
-        }
-
-        if (canGenerateMon) {
-            Invoke("GenerateMonster", 1f);
-        }
-
-     }
-
-
-    public void StartGenMon() {
-        canGenerateMon = true;
-        Invoke("GenerateMonster", 1f);
-    }
-
-    public void StopGenMon()
-    {
-        canGenerateMon = false;
-    }
-
-
-
 }
