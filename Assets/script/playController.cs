@@ -16,6 +16,7 @@ public class playController : MonoBehaviour
 	public float canHitCoolDown = 0.5f;
 	public float canMoveCoolDown = 2; //分裂時先停在原地
 
+	public float scaleMax = 0.8f;
 	public int hp;
 
     private void OnEnable()
@@ -29,15 +30,12 @@ public class playController : MonoBehaviour
     public void init(int hp, bool isMore = false)
 	{
 		this.hp = hp;
-		animator = GetComponent<Animator>();
-		spriteRenderer = GetComponent<SpriteRenderer>();
-		rig2d = GetComponent<Rigidbody2D>();
 		if(GameManager.GetInstance().slimes.Contains(this) == false)
         {
 			GameManager.GetInstance().slimes.Add(this);
 		}
 		
-		canMoreCoolDown = 5;
+		canMoreCoolDown = 2;
 		canMoveCoolDown = isMore ? 3 : 0;
 		isInit = true;
 	}
@@ -84,30 +82,23 @@ public class playController : MonoBehaviour
 		if (Horizontal == 0 && Vertical == 0)
 		{
 			rig2d.velocity = Vector2.Lerp(rig2d.velocity, Vector2.zero, 0.1f);
+			animator.SetBool("isWalk", false);
 		}
 		else
 		{
 			Vector2 velocity = moveCircle(new Vector2(Horizontal, Vertical));
 			rig2d.velocity = velocity * (run ? GameManager.GetInstance().speed * 2 : GameManager.GetInstance().speed);
 
-			if (Horizontal >= 0.01f && moveType != 1)
-			{
-				moveType = 1;
+			if(Horizontal >= 0.01f)
+            {
+				spriteRenderer.flipX = false;
+            }
+            else if(Horizontal <= -0.01f)
+            {
+				spriteRenderer.flipX = true;
 			}
-			else if (Horizontal <= -0.01f && moveType != -1)
-			{
-				moveType = -1;
-			}
-			else if (Horizontal > -0.01f && Horizontal < 0.01f && moveType != 0)
-			{
-				moveType = 0;
-
-			}
+			animator.SetBool("isWalk", true);
 		}
-
-		
-		// update animator parameters
-		animator.SetInteger("HorizonAxis", moveType);
 	}
 
 	void coolDown()
@@ -139,15 +130,15 @@ public class playController : MonoBehaviour
 	void changeSize()
     {
 		float size = hp / (float)GameManager.GetInstance().playerMaxHP;
-		transform.localScale = new Vector3(size, size, size);
+		transform.localScale = new Vector3(size, size, size) * scaleMax;
 
         if (isRoot)
         {
-			spriteRenderer.sortingOrder = 1;
+			spriteRenderer.sortingOrder = 2;
         }
         else
         {
-			spriteRenderer.sortingOrder = 0;
+			spriteRenderer.sortingOrder = 2;
 		}
     }
 
@@ -224,8 +215,8 @@ public class playController : MonoBehaviour
         }
 		canMoreCoolDown = 0.5f;
 		hp = Mathf.Clamp(otherSlime.hp + hp, 0, GameManager.GetInstance().playerMaxHP);
-		GameManager.GetInstance().slimes.Remove(this);
-		Destroy(other.gameObject);
+		GameManager.GetInstance().slimes.Remove(otherSlime);
+		Destroy(otherSlime.gameObject);
 
 	}
 }
