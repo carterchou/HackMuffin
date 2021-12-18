@@ -15,7 +15,7 @@ public class MonsterState : MonoBehaviour
 
     void Start(){
         NMA = GetComponent<NavMeshAgent>();
-        player = GameManager.GetInstance().player;
+        player = monsterManager.GetInstance().player;
 
     }
 
