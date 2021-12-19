@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class playController : MonoBehaviour
 {
 	[SerializeField] Animator animator;
 	[SerializeField] SpriteRenderer spriteRenderer;
 	[SerializeField] Rigidbody2D rig2d;
 	public GameObject prefab;
-
+	public bool rotate = false;
 	bool isInit;
 	int moveType = 0;
 	public bool isRoot = false;
@@ -101,6 +102,15 @@ public class playController : MonoBehaviour
 		}
 	}
 
+	void attack()
+    {
+		if (Input.GetMouseButton(0)){
+			rotate = true;
+		}else{
+			rotate = false;
+		}
+	}
+
 	void coolDown()
     {
 		if (canMoveCoolDown > 0)
@@ -160,14 +170,14 @@ public class playController : MonoBehaviour
 		}
 	}
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-		if (other.tag == "enemy" && canHitCoolDown <= 0)
-		{
-			canHitCoolDown = 2;
-			Debug.Log("Get hit");
-			becomeMore(other);
-		}
+	
+
+
+
+    void OnTriggerEnter2D(Collider2D other)
+	{
+
+		//animator.SetTrigger("hasDamage");
 	}
 
 	Vector2 moveCircle(Vector2 raw)
@@ -199,7 +209,7 @@ public class playController : MonoBehaviour
 			}
 
 			force3 = (transform.position - other.transform.position).normalized;
-			force = new Vector2(force3.x, force3.y) * Random.Range(4, 8);
+			force = new Vector2(force3.x, force3.y) * Random.Range(1, 2);
 			rig2d.velocity = force;
 		}
         else
