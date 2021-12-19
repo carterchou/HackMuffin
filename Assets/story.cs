@@ -19,7 +19,7 @@ public class story : MonoBehaviour
 
     public void PlayStory(int type)
     {
-
+        SceneManager.LoadScene(3);
         
         flowChatManager.GetInstance().GetComponent<Fungus.Flowchart>().GetVariable("storyType");
         //古代場景
@@ -28,16 +28,17 @@ public class story : MonoBehaviour
             SceneManager.LoadScene(0);
         }
 
+        if (type == 2)
+        {
+            SceneManager.LoadScene(4);
+        }
+
         if (type == 1)
         {
             SceneManager.LoadScene(1);
             Fungus.Flowchart.BroadcastFungusMessage("future");
         }
-        if (type == 2)
-        {
-            //正常遊戲模式
-            Fungus.Flowchart.BroadcastFungusMessage("disappearend");
-        }
+        
        
     }
     

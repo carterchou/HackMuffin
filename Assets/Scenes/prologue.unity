@@ -1159,6 +1159,7 @@ GameObject:
   - component: {fileID: 1755499640}
   - component: {fileID: 1755499639}
   - component: {fileID: 1755499641}
+  - component: {fileID: 1755499642}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -1180,7 +1181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 340, y: 89.5}
+  scrollPos: {x: 77.5, y: 40}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 274
@@ -1191,10 +1192,8 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 1755499608}
-  selectedCommands:
-  - {fileID: 1755499641}
+  selectedBlocks: []
+  selectedCommands: []
   variables:
   - {fileID: 1755499634}
   description: 
@@ -1221,7 +1220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 4
   indentLevel: 0
-  storyText: "\uFF08\u7A81\u7136\uFF0C\u4E00\u9663\u767D\u5149\u9583\u904E\uFF0C\u5927\u6CD5\u5E2B\u8207\u4E3B\u89D2\u96D9\u96D9\u6D88\u5931\uFF09"
+  storyText: "\uFF08\u7A81\u7136\uFF0C\u5730\u4E0A\u5192\u51FA\u4E00\u500B\u9ED1\u6D1E\uFF0C\u5C07\u5927\u6CD5\u5E2B\u8207\u4E3B\u89D2\u5438\u5165\uFF09"
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
@@ -1249,7 +1248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: -53
+    x: -54
     y: 70
     width: 77
     height: 40
@@ -1266,6 +1265,7 @@ MonoBehaviour:
   - {fileID: 1755499612}
   - {fileID: 1755499611}
   - {fileID: 1755499607}
+  - {fileID: 1755499642}
   - {fileID: 1755499617}
   - {fileID: 1755499635}
   suppressAllAutoSelections: 0
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 39
+    x: 40
     y: 69
     width: 86
     height: 40
@@ -2128,6 +2128,51 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       typeFullname: System.Int32
       intValue: 0
+      boolValue: 0
+      floatValue: 0
+      stringValue: 
+      colorValue: {r: 0, g: 0, b: 0, a: 0}
+      gameObjectValue: {fileID: 0}
+      materialValue: {fileID: 0}
+      objectValue: {fileID: 0}
+      spriteValue: {fileID: 0}
+      textureValue: {fileID: 0}
+      vector2Value: {x: 0, y: 0}
+      vector3Value: {x: 0, y: 0, z: 0}
+    variableKey: 
+  saveReturnValue: 0
+  returnValueVariableKey: 
+  returnValueType: System.Void
+  showInherited: 0
+  callMode: 0
+--- !u!114 &1755499642
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755499605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688e35811870d403f9e2b1ab2a699d98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 32
+  indentLevel: 0
+  description: 
+  targetObject: {fileID: 1755499605}
+  targetComponentAssemblyName: story, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  targetComponentFullname: UnityEngine.Component[]
+  targetComponentText: story
+  targetMethod: PlayStory
+  targetMethodText: 'PlayStory (Int32): Void'
+  methodParameters:
+  - objValue:
+      typeAssemblyname: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      typeFullname: System.Int32
+      intValue: 2
       boolValue: 0
       floatValue: 0
       stringValue: 
