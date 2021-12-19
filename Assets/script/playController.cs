@@ -118,20 +118,29 @@ public class playController : MonoBehaviour
 	
 	void fireball()
     {
-        if (Input.GetMouseButton(0)){
-			aimOBJ.click = true;
+		bool isFire = false;
+        if (Input.GetMouseButton(1)){
+			isFire = true;
+			if (aim.instance != null)
+			{
+				aim.instance.click = true;
+			}
 		}
-		if (Input.GetMouseButtonDown(1)){
-			aimOBJ.click = true;
+		else
+		{
+			if (aim.instance != null)
+			{
+				aim.instance.click = false;
+			}
+		}
+
+		if (Input.GetMouseButtonDown(0) && isFire)
+		{
 			fireball fireball = Instantiate(fire, transform.position, transform.rotation).GetComponent<fireball>();
 			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			fireball.targetPos = new Vector3(pos.x, pos.y,0);
+			fireball.targetPos = (new Vector3(pos.x, pos.y,0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized;
 			fireball.isInit = true;
 			//fire.rigidbody.AddForce(aimOBJ.position);
-		}
-        else
-        {
-			aimOBJ.click = false;
 		}
 	}
 
