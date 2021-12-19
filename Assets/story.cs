@@ -9,6 +9,11 @@ public class story : MonoBehaviour
     void Start()
     {
         Fungus.Flowchart.BroadcastFungusMessage("gameStart");
+        SceneManager.LoadScene(3);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Fungus.Flowchart.BroadcastFungusMessage("start");
+        }
     }
 
     // Update is called once per frame
@@ -19,8 +24,6 @@ public class story : MonoBehaviour
 
     public void PlayStory(int type)
     {
-        SceneManager.LoadScene(3);
-        
         flowChatManager.GetInstance().GetComponent<Fungus.Flowchart>().GetVariable("storyType");
         //古代場景
         if (type == 0)
