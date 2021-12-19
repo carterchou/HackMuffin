@@ -36,17 +36,16 @@ public class Monster : MonoBehaviour
     */
 
     // Update is called once per frame
-    void Update() {
 
-        hurt = false;
-        Invoke("OnCollisionEnter2D", 1f);
-        void OnCollisionEnter2D(Collider2D collision){
-            if (collision.gameObject.tag == "weapon") {
-                hurt = true;
+    void OnCollisionEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "weapon")
+        {
+            hurt = true;
+        }
 
-            } else if (Blood == 0){
-                Destroy(this.gameObject);
-            }
+        if (Blood == 0){
+            Destroy(this.gameObject);
         }
     }
 
