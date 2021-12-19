@@ -52,4 +52,17 @@ public class GameManager : MonoBehaviour
             slimes[0].SetRoot(true);
         }
     }
+
+    public playController GetRoot() {
+        foreach (playController slime in slimes)
+        {
+            if (slime.CheckRoot())
+            {
+                return slime;
+            }
+        }
+
+        return null;
+    }
+
 }
