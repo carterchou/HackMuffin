@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class MainGame : MonoBehaviour
 {
     GameManager gameManager;
@@ -9,6 +9,9 @@ public class MainGame : MonoBehaviour
     public GameObject SlimePrefab;
     // Start is called before the first frame update
     bool isInit = false;
+
+    public Image hpBar;
+    public Text money;
 
     void Start()
     {
@@ -18,7 +21,7 @@ public class MainGame : MonoBehaviour
 
         //create first
         playController root = Instantiate(SlimePrefab).GetComponent<playController>();
-        root.init(GameManager.GetInstance().playerMaxHP);
+        root.init(GameManager.GetInstance().GameHp);
         root.SetRoot(true);
 
         if (gameManager.lastScene == "3_Store")
@@ -31,7 +34,7 @@ public class MainGame : MonoBehaviour
         }
 
 
-        isInit = false;
+        isInit = true;
     }
 
     // Update is called once per frame
@@ -57,6 +60,7 @@ public class MainGame : MonoBehaviour
 
         //checkRoot;
         bool foundRoot = false;
+        float hp = 0;
         for (int i = slimes.Count - 1; i >= 0; i--)
         {
             if (slimes[i] == null)
@@ -68,14 +72,19 @@ public class MainGame : MonoBehaviour
             if (foundRoot == false && slimes[i].CheckRoot())
             {
                 foundRoot = true;
-                break;
             }
+
+            //HP
+            hp += slimes[i].hp;
         }
 
         if (foundRoot == false && slimes.Count > 0)
         {
             slimes[0].SetRoot(true);
         }
+
+        hpBar.fillAmount = hp / gameManager.playerMaxHP;
+        money.text = gameManager.GameMoney.ToString();
 
     }
 }

@@ -41,7 +41,7 @@ public class MonsterState : MonoBehaviour
         if (GameManager.GetInstance().GetRoot()) {
             target = GameManager.GetInstance().GetRoot().transform;
             float distance = Vector2.Distance(transform.position, target.position);
-            if (distance <= 0.5f)
+            if (distance <= 0.25f)
             {
                 type = moveType.tooClose;
             } else if (distance <= 10) {

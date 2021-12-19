@@ -69,6 +69,11 @@ public class openScene : MonoBehaviour
     }
 
     public void GoScene() {
+        if(GameManager.GetInstance().GetRoot() != null)
+        {
+            GameManager.GetInstance().GameHp = GameManager.GetInstance().GetRoot().hp;
+        }
+        
         GameManager.GetInstance().GoScene(sceneName);
     }
 

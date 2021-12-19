@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public int playerMaxHP = 10;
     public int speed = 2;
 
+    public int GameMoney = 0;
+    public int GameHp = 10;
+
     public string lastScene = ""; //lobby、前言 -1 mainMap 0 store 1
     public string nowScene = ""; //lobby、前言 -1 mainMap 0 store 1
 

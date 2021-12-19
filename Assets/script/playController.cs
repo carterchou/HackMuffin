@@ -17,6 +17,9 @@ public class playController : MonoBehaviour
 	public float canHitCoolDown = 0.5f;
 	public float canMoveCoolDown = 2; //分裂時先停在原地
 
+	public AudioClip[] se; //分裂 聚合
+	public AudioSource sePlayer;
+
 	public float scaleMax = 0.8f;
 	public int hp;
 
@@ -36,6 +39,10 @@ public class playController : MonoBehaviour
 	public void SetRoot(bool isRoot)
     {
 		this.isRoot = isRoot;
+        if (GetComponent<BoxCollider2D>().isTrigger && isRoot)
+        {
+			GetComponent<BoxCollider2D>().isTrigger = false;
+		}
 	}
 
 	public bool CheckRoot()
@@ -110,12 +117,7 @@ public class playController : MonoBehaviour
 		if (canMoveCoolDown > 0)
 		{
 			canMoveCoolDown -= Time.deltaTime;
-			GetComponent<BoxCollider2D>().isTrigger = true;
 			return;
-        }
-        else
-        {
-			GetComponent<BoxCollider2D>().isTrigger = false;
         }
 
 		if (canMoreCoolDown > 0)
@@ -135,43 +137,52 @@ public class playController : MonoBehaviour
     {
 		float size = hp / (float)GameManager.GetInstance().playerMaxHP;
 		transform.localScale = new Vector3(size, size, size) * scaleMax;
-
-        if (isRoot)
-        {
-			spriteRenderer.sortingOrder = 2;
-        }
-        else
-        {
-			spriteRenderer.sortingOrder = 2;
-		}
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
 		if (other.collider.tag == "enemy" && canHitCoolDown <= 0)
 		{
-			canHitCoolDown = 2;
+			animator.SetTrigger("doTouch");
+			canHitCoolDown = 0.5f;
 			Debug.Log("Get hit");
 			becomeMore(other.collider);
 		}
 	}
 
+    private void OnCollisionExit2D(Collision2D other)
+    {
+		if (other.collider.tag == "Player" && GetComponent<BoxCollider2D>().isTrigger)
+		{
+			GetComponent<BoxCollider2D>().isTrigger = false;
+		}
+	}
+
     private void OnCollisionStay2D(Collision2D other)
     {
-		if (other.collider.tag == "Player" && isRoot && canMoreCoolDown <= 0)
+		if (other.collider.tag == "enemy" && canHitCoolDown <= 0)
+		{
+			animator.SetTrigger("doTouch");
+			canHitCoolDown = 0.5f;
+			Debug.Log("Get hit");
+			becomeMore(other.collider);
+		}else if (other.collider.tag == "Player" && isRoot && canMoreCoolDown <= 0)
 		{
 			combine(other.collider);
 		}
 	}
 
-	
-
-
 
     void OnTriggerEnter2D(Collider2D other)
 	{
-
-		//animator.SetTrigger("hasDamage");
+		
+		if (other.tag == "enemy" && canHitCoolDown <= 0)
+		{
+			animator.SetTrigger("doTouch");
+			canHitCoolDown = 0.5f;
+			Debug.Log("Get hit");
+			becomeMore(other);
+		}
 	}
 
 	Vector2 moveCircle(Vector2 raw)
@@ -200,6 +211,7 @@ public class playController : MonoBehaviour
 				force3 = (transform.position - other.transform.position).normalized ;
 				force = new Vector2(force3.x, force3.y) * Random.Range(4,8);
 				more.GetComponent<Rigidbody2D>().velocity = force;
+				sePlayer.PlayOneShot(se[0]);
 			}
 
 			force3 = (transform.position - other.transform.position).normalized;
@@ -224,6 +236,7 @@ public class playController : MonoBehaviour
 		canMoreCoolDown = 0.5f;
 		hp = Mathf.Clamp(otherSlime.hp + hp, 0, GameManager.GetInstance().playerMaxHP);
 		GameManager.GetInstance().MainGameController.slimes.Remove(otherSlime);
+		sePlayer.PlayOneShot(se[1]);
 		Destroy(otherSlime.gameObject);
 
 	}
