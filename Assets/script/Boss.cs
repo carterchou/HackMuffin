@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
     public int Blood = 1000;
     public int attack = 100;
-   
 
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (Blood == 0)
+	    if (other.collider.tag == "Player" && other.collider.GetComponent<playController>().CheckRoot())
         {
-            Destroy(this.gameObject);
+            SceneManager.LoadScene("4_end");
         }
     }
 }
