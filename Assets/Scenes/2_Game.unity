@@ -19733,6 +19733,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.24429575, y: 0.19770396}
   m_EdgeRadius: 0
+--- !u!114 &1191012534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191012532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7223c34889d3ce408c650ffca119111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Blood: 1000
+  attack: 100
 --- !u!1001 &1192309858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36788,7 +36802,7 @@ PrefabInstance:
     - target: {fileID: 4413741992814748315, guid: 7e90fbf567c90b54db592dd2c02235df,
         type: 3}
       propertyPath: m_TagString
-      value: enemy
+      value: boss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e90fbf567c90b54db592dd2c02235df, type: 3}
