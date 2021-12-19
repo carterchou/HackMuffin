@@ -272,6 +272,11 @@ PrefabInstance:
       propertyPath: nodeRect.y
       value: 70.03093
       objectReference: {fileID: 0}
+    - target: {fileID: 5577218546786320161, guid: 7204f458bd7714e0cbaaaa76697d4119,
+        type: 3}
+      propertyPath: nodeRect.x
+      value: -56.06186
+      objectReference: {fileID: 0}
     - target: {fileID: 5577218546786320163, guid: 7204f458bd7714e0cbaaaa76697d4119,
         type: 3}
       propertyPath: m_RootOrder
@@ -386,7 +391,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5577218548252144509
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -413,7 +418,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &5577218548252144510
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -427,7 +432,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 137.21135
     y: 70.37115
-    width: 73.71134
+    width: 74
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 1
@@ -440,7 +445,7 @@ MonoBehaviour:
   suppressAllAutoSelections: 0
 --- !u!114 &5577218548252144511
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
