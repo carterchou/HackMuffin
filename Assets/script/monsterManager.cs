@@ -54,7 +54,7 @@ public class monsterManager : MonoBehaviour
         else if (randomMon == 1)
         {
             GameObject tempG = Instantiate(mediumMonster);
-            tempG.GetComponent<Transform>().localPosition = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
+            tempG.GetComponent<Transform>().localPosition = new Vector2(Random.Range(-10, 10), Random.Range(-10, 10));
             //tempG.GetComponent<Monster>().blood = 10000;
         }
         else
