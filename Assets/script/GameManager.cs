@@ -1,22 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     static GameManager instance;
 
-    public List<playController> slimes;
+    public MainGame MainGameController;
     public int playerMaxHP = 10;
     public int speed = 2;
 
-    bool isLose = false;
+    public string lastScene = ""; //lobby、前言 -1 mainMap 0 store 1
+    public string nowScene = ""; //lobby、前言 -1 mainMap 0 store 1
+
+    public bool isLose = false;
  
     public static GameManager GetInstance() {
         if(instance == null)
         {
             instance = new GameObject("GameManager").AddComponent<GameManager>();
-            instance.slimes = new List<playController>();
+            DontDestroyOnLoad(instance.gameObject);
         }
 
         return instance;
@@ -29,33 +33,19 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if(slimes.Count <= 0 && isLose == false)
-        {
-            isLose = true;
-            Debug.Log("lose");
-            return;
-        }
-
-        //checkRoot;
-        bool foundRoot = false;
-        foreach (playController slime in slimes)
-        {
-            if(foundRoot == false && slime.CheckRoot())
-            {
-                foundRoot = true;
-                break;
-            }
-        }
-
-        if(foundRoot == false)
-        {
-            slimes[0].SetRoot(true);
-        }
     }
 
     public playController GetRoot() {
-        foreach (playController slime in slimes)
+        if(MainGameController == null)
         {
+            return null;
+        }
+        foreach(playController slime in MainGameController.slimes)
+        {
+            if(slime == null)
+            {
+                continue;
+            }
             if (slime.CheckRoot())
             {
                 return slime;
@@ -63,6 +53,12 @@ public class GameManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void GoScene(string Name) {
+        lastScene = nowScene;
+        nowScene = Name;
+        SceneManager.LoadScene(Name);
     }
 
 }

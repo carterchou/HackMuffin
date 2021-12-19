@@ -9,7 +9,7 @@ public class playController : MonoBehaviour
 	[SerializeField] SpriteRenderer spriteRenderer;
 	[SerializeField] Rigidbody2D rig2d;
 	public GameObject prefab;
-	public bool rotate = false;
+	public rotate rotateOBJ;
 	bool isInit;
 	int moveType = 0;
 	public bool isRoot = false;
@@ -20,20 +20,12 @@ public class playController : MonoBehaviour
 	public float scaleMax = 0.8f;
 	public int hp;
 
-    private void OnEnable()
-    {
-		if (isRoot && isInit == false)
-		{
-			init(GameManager.GetInstance().playerMaxHP);
-		}
-	}
-
     public void init(int hp, bool isMore = false)
 	{
 		this.hp = hp;
-		if(GameManager.GetInstance().slimes.Contains(this) == false)
+		if(GameManager.GetInstance().MainGameController.slimes.Contains(this) == false)
         {
-			GameManager.GetInstance().slimes.Add(this);
+			GameManager.GetInstance().MainGameController.slimes.Add(this);
 		}
 		
 		canMoreCoolDown = 2;
@@ -65,6 +57,8 @@ public class playController : MonoBehaviour
 		coolDown();
 
 		move();
+
+		attack();
 
 	}
 
@@ -105,9 +99,9 @@ public class playController : MonoBehaviour
 	void attack()
     {
 		if (Input.GetMouseButton(0)){
-			rotate = true;
+			rotateOBJ.isRotate = true;
 		}else{
-			rotate = false;
+			rotateOBJ.isRotate = false;
 		}
 	}
 
@@ -214,7 +208,7 @@ public class playController : MonoBehaviour
 		}
         else
         {
-			GameManager.GetInstance().slimes.Remove(this);
+			GameManager.GetInstance().MainGameController.slimes.Remove(this);
 			Destroy(gameObject);
 		}
 
@@ -229,7 +223,7 @@ public class playController : MonoBehaviour
         }
 		canMoreCoolDown = 0.5f;
 		hp = Mathf.Clamp(otherSlime.hp + hp, 0, GameManager.GetInstance().playerMaxHP);
-		GameManager.GetInstance().slimes.Remove(otherSlime);
+		GameManager.GetInstance().MainGameController.slimes.Remove(otherSlime);
 		Destroy(otherSlime.gameObject);
 
 	}
