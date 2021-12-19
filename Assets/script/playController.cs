@@ -9,7 +9,7 @@ public class playController : MonoBehaviour
 	[SerializeField] SpriteRenderer spriteRenderer;
 	[SerializeField] Rigidbody2D rig2d;
 	public GameObject prefab;
-	public bool rotate = false;
+	public rotate rotateOBJ;
 	bool isInit;
 	int moveType = 0;
 	public bool isRoot = false;
@@ -66,6 +66,8 @@ public class playController : MonoBehaviour
 
 		move();
 
+		attack();
+
 	}
 
 	void move()
@@ -105,9 +107,9 @@ public class playController : MonoBehaviour
 	void attack()
     {
 		if (Input.GetMouseButton(0)){
-			rotate = true;
+			rotateOBJ.isRotate = true;
 		}else{
-			rotate = false;
+			rotateOBJ.isRotate = false;
 		}
 	}
 

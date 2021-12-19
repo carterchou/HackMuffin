@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class rotate : MonoBehaviour
 {
-    public bool rotate = false;
+    public bool isRotate = false;
 
     void Start()
     {
@@ -14,13 +14,13 @@ public class rotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rotate)
+        if (isRotate)
         {
             transform.Rotate(0, 0, -20);
         }
         else
         {
-            transform.Rotate(0, 0, 0);
+            transform.localRotation = new Quaternion(0, 0, 0, 0);
         }
 
     }
