@@ -160,10 +160,14 @@ public class playController : MonoBehaviour
 		}
 	}
 
-    void OnTriggerEnter2D(Collider2D other)
-	{
-
-		//animator.SetTrigger("hasDamage");
+    private void OnTriggerStay2D(Collider2D other)
+    {
+		if (other.tag == "enemy" && canHitCoolDown <= 0)
+		{
+			canHitCoolDown = 2;
+			Debug.Log("Get hit");
+			becomeMore(other);
+		}
 	}
 
 	Vector2 moveCircle(Vector2 raw)
@@ -195,7 +199,7 @@ public class playController : MonoBehaviour
 			}
 
 			force3 = (transform.position - other.transform.position).normalized;
-			force = new Vector2(force3.x, force3.y) * Random.Range(1, 2);
+			force = new Vector2(force3.x, force3.y) * Random.Range(4, 8);
 			rig2d.velocity = force;
 		}
         else
