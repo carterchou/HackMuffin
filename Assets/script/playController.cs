@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class playController : MonoBehaviour
 {
 	[SerializeField] Animator animator;
 	[SerializeField] SpriteRenderer spriteRenderer;
 	[SerializeField] Rigidbody2D rig2d;
 	public GameObject prefab;
-
+	public bool rotate = false;
 	bool isInit;
 	int moveType = 0;
 	public bool isRoot = false;
@@ -101,6 +102,15 @@ public class playController : MonoBehaviour
 		}
 	}
 
+	void attack()
+    {
+		if (Input.GetMouseButton(0)){
+			rotate = true;
+		}else{
+			rotate = false;
+		}
+	}
+
 	void coolDown()
     {
 		if (canMoveCoolDown > 0)
@@ -159,6 +169,10 @@ public class playController : MonoBehaviour
 			combine(other.collider);
 		}
 	}
+
+	
+
+
 
     void OnTriggerEnter2D(Collider2D other)
 	{

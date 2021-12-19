@@ -11,7 +11,7 @@ public class monsterManager : MonoBehaviour
         return instance;
     }
 
-    public GameObject player;
+    //public GameObject player;
     public GameObject littleMonster;
     public GameObject mediumMonster;
     public GameObject bigMonster;

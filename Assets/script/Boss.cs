@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int Blood = 1000;
+    public int attack = 100;
+   
+
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Blood == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

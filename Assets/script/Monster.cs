@@ -21,7 +21,7 @@ public class Monster : MonoBehaviour
 
 
     /*
-    //¥Í¦¨©Çª«
+    //ï¿½Í¦ï¿½ï¿½Çªï¿½
     public void CreateMonster()
     {
         int LittleMonsterNum = Random.Range(0, 5);
@@ -38,16 +38,25 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update() {
 
-        hurt = false;
-        Invoke("OnCollisionEnter2D", 1f);
-        void OnCollisionEnter2D(Collider2D collision){
-            if (collision.gameObject.tag == "weapon") {
-                hurt = true;
+    }
 
-            } else if (Blood == 0){
-                Destroy(this.gameObject);
-            }
+    void OnCollisionEnter2D(Collider2D collision)
+    {
+        Debug.LogWarning("hit player111");
+        if (collision.gameObject.tag == "weapon")
+        {
+            hurt = true;
+
         }
+        else if (Blood == 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.LogWarning("hit player222");
     }
 
 }
