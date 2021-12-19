@@ -20,20 +20,12 @@ public class playController : MonoBehaviour
 	public float scaleMax = 0.8f;
 	public int hp;
 
-    private void OnEnable()
-    {
-		if (isRoot && isInit == false)
-		{
-			init(GameManager.GetInstance().playerMaxHP);
-		}
-	}
-
     public void init(int hp, bool isMore = false)
 	{
 		this.hp = hp;
-		if(GameManager.GetInstance().slimes.Contains(this) == false)
+		if(GameManager.GetInstance().MainGameController.slimes.Contains(this) == false)
         {
-			GameManager.GetInstance().slimes.Add(this);
+			GameManager.GetInstance().MainGameController.slimes.Add(this);
 		}
 		
 		canMoreCoolDown = 2;
@@ -216,7 +208,7 @@ public class playController : MonoBehaviour
 		}
         else
         {
-			GameManager.GetInstance().slimes.Remove(this);
+			GameManager.GetInstance().MainGameController.slimes.Remove(this);
 			Destroy(gameObject);
 		}
 
@@ -231,7 +223,7 @@ public class playController : MonoBehaviour
         }
 		canMoreCoolDown = 0.5f;
 		hp = Mathf.Clamp(otherSlime.hp + hp, 0, GameManager.GetInstance().playerMaxHP);
-		GameManager.GetInstance().slimes.Remove(otherSlime);
+		GameManager.GetInstance().MainGameController.slimes.Remove(otherSlime);
 		Destroy(otherSlime.gameObject);
 
 	}

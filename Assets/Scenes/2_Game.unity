@@ -4891,7 +4891,7 @@ PrefabInstance:
     - target: {fileID: 7863546952096768659, guid: 4cbe89e4b3f154523bb99bcf9b51aa84,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7863546952096768659, guid: 4cbe89e4b3f154523bb99bcf9b51aa84,
         type: 3}
@@ -6101,7 +6101,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &375168477
 PrefabInstance:
@@ -30018,6 +30018,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca81dcc5336294b67bc09c26979c2b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slimes: []
+  SlimePrefab: {fileID: 7863546952096768659, guid: 4cbe89e4b3f154523bb99bcf9b51aa84,
+    type: 3}
 --- !u!4 &1622312051
 Transform:
   m_ObjectHideFlags: 0
@@ -32849,7 +32852,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1905585801
 PrefabInstance:
