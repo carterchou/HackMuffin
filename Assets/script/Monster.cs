@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
-    public Image HP;
+    public GameObject weapon;
     public int Blood = 0;
     public int attack = 0;
     public int money = 0;
-  
+    private bool hurt = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class Monster : MonoBehaviour
         //HP.fillAmount; 
     }
 
- 
+
 
 
     /*
@@ -36,11 +36,18 @@ public class Monster : MonoBehaviour
     */
 
     // Update is called once per frame
-    void Update(){
-        if (Blood == 0){
-            Destroy(this.gameObject);
+    void Update() {
+
+        hurt = false;
+        Invoke("OnCollisionEnter2D", 1f);
+        void OnCollisionEnter2D(Collider2D collision){
+            if (collision.gameObject.tag == "weapon") {
+                hurt = true;
+
+            } else if (Blood == 0){
+                Destroy(this.gameObject);
+            }
         }
     }
 
- 
 }
