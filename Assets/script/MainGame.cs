@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class MainGame : MonoBehaviour
 {
@@ -55,6 +56,7 @@ public class MainGame : MonoBehaviour
         {
             gameManager.isLose = true;
             Debug.Log("lose");
+            SceneManager.LoadScene("4_end");
             return;
         }
 
