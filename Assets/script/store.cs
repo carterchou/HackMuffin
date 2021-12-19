@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class store : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void buy()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Fungus.Flowchart.BroadcastFungusMessage("buy");
     }
 }
