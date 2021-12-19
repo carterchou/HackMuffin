@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class GameManager : MonoBehaviour
     public int playerMaxHP = 10;
     public int speed = 2;
 
-    bool isLose = false;
+    public string lasScene = ""; //lobby、前言 -1 mainMap 0 store 1
+    public string nowScene = ""; //lobby、前言 -1 mainMap 0 store 1
+
+    public bool isLose = false;
  
     public static GameManager GetInstance() {
         if(instance == null)
@@ -26,13 +30,6 @@ public class GameManager : MonoBehaviour
     {
         if (isLose)
         {
-            return;
-        }
-
-        if(slimes.Count <= 0 && isLose == false)
-        {
-            isLose = true;
-            Debug.Log("lose");
             return;
         }
 
@@ -63,6 +60,12 @@ public class GameManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void GoScene(string Name) {
+        lasScene = nowScene;
+        nowScene = Name;
+        SceneManager.LoadScene(Name);
     }
 
 }
