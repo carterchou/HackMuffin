@@ -19,11 +19,14 @@ public class story : MonoBehaviour
 
     public void PlayStory(int type)
     {
-        //古代場景
-        //SceneManager.LoadScene(0);
-        //int type = 0;
-        flowChatManager.GetInstance().GetComponent<Fungus.Flowchart>().GetVariable("storyType");
 
+        
+        flowChatManager.GetInstance().GetComponent<Fungus.Flowchart>().GetVariable("storyType");
+        //古代場景
+        if (type == 0)
+        {
+            SceneManager.LoadScene(0);
+        }
 
         if (type == 1)
         {
