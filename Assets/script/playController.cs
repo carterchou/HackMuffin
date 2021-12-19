@@ -9,7 +9,9 @@ public class playController : MonoBehaviour
 	[SerializeField] SpriteRenderer spriteRenderer;
 	[SerializeField] Rigidbody2D rig2d;
 	public GameObject prefab;
+	public GameObject fire;
 	public rotate rotateOBJ;
+	public aim aimOBJ;
 	bool isInit;
 	int moveType = 0;
 	public bool isRoot = false;
@@ -110,7 +112,29 @@ public class playController : MonoBehaviour
 		}else{
 			rotateOBJ.isRotate = false;
 		}
+		fireball();
 	}
+
+	
+	void fireball()
+    {
+        if (Input.GetMouseButton(0)){
+			aimOBJ.click = true;
+		}
+		if (Input.GetMouseButtonDown(1)){
+			aimOBJ.click = true;
+			fireball fireball = Instantiate(fire, transform.position, transform.rotation).GetComponent<fireball>();
+			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			fireball.targetPos = new Vector3(pos.x, pos.y,0);
+			fireball.isInit = true;
+			//fire.rigidbody.AddForce(aimOBJ.position);
+		}
+        else
+        {
+			aimOBJ.click = false;
+		}
+	}
+
 
 	void coolDown()
     {
