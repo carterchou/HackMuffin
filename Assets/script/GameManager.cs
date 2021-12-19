@@ -7,11 +7,14 @@ public class GameManager : MonoBehaviour
 {
     static GameManager instance;
 
-    public List<playController> slimes;
+    public MainGame MainGameController;
     public int playerMaxHP = 10;
     public int speed = 2;
 
-    public string lasScene = ""; //lobby、前言 -1 mainMap 0 store 1
+    public int GameMoney = 0;
+    public int GameHp = 10;
+
+    public string lastScene = ""; //lobby、前言 -1 mainMap 0 store 1
     public string nowScene = ""; //lobby、前言 -1 mainMap 0 store 1
 
     public bool isLose = false;
@@ -20,7 +23,7 @@ public class GameManager : MonoBehaviour
         if(instance == null)
         {
             instance = new GameObject("GameManager").AddComponent<GameManager>();
-            instance.slimes = new List<playController>();
+            DontDestroyOnLoad(instance.gameObject);
         }
 
         return instance;
@@ -33,26 +36,19 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        //checkRoot;
-        bool foundRoot = false;
-        foreach (playController slime in slimes)
-        {
-            if(foundRoot == false && slime.CheckRoot())
-            {
-                foundRoot = true;
-                break;
-            }
-        }
-
-        if(foundRoot == false)
-        {
-            slimes[0].SetRoot(true);
-        }
     }
 
     public playController GetRoot() {
-        foreach (playController slime in slimes)
+        if(MainGameController == null)
         {
+            return null;
+        }
+        foreach(playController slime in MainGameController.slimes)
+        {
+            if(slime == null)
+            {
+                continue;
+            }
             if (slime.CheckRoot())
             {
                 return slime;
@@ -63,7 +59,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void GoScene(string Name) {
-        lasScene = nowScene;
+        lastScene = nowScene;
         nowScene = Name;
         SceneManager.LoadScene(Name);
     }
