@@ -199,7 +199,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7863546951437781063}
   rig2d: {fileID: 7863546952096768657}
   prefab: {fileID: 7863546952096768659}
+  fire: {fileID: 8230537504935802268, guid: 59e4b2aa444fda74eb3b31464246e40f, type: 3}
   rotateOBJ: {fileID: 4132526164343023248}
+  aimOBJ: {fileID: 0}
   isRoot: 0
   canMoreCoolDown: 0.5
   canHitCoolDown: 0.5

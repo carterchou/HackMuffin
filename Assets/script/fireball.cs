@@ -21,7 +21,12 @@ public class fireball : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = false;
             return;
         }
-        transform.Translate((targetPos - transform.position).normalized * speed);
+        transform.Translate(targetPos * speed);
+
+        if (Vector3.Distance(targetPos, transform.position) <= 0.1f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -30,6 +35,13 @@ public class fireball : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag != "Player")
+        {
+            Destroy(gameObject);
+        }
     }
 }

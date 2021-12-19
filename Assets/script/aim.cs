@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class aim : MonoBehaviour
 {
-
+    public static aim instance;
     public bool click = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
+        instance = this;
     }
 
     // Update is called once per frame
